@@ -23,8 +23,12 @@ abstract class _HomeControllerBase with Store {
         (value) => List.generate(
           50,
           (index) => ProductModel(
-            name: "Produto $index ",
-            price: 1.0 * index,
+            name: "Bacon $index ",
+            image: "https://baconmockup.com/10" +
+                index.toString() +
+                "/10" +
+                index.toString(),
+            price: 1.0 * index + 1,
           ),
         ),
       );

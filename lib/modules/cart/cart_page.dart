@@ -1,5 +1,5 @@
 import 'package:carrinho_de_compras/modules/cart/cart_controller.dart';
-import 'package:carrinho_de_compras/shared/utils/extensions.dart';
+import 'package:carrinho_de_compras/shared/widget/card_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -20,44 +20,20 @@ class _CartPageState extends State<CartPage> {
         return widget.controller.list.isEmpty
             ? Center(child: Text("OPS! Seu carrinho está vazio"))
             : ListView.builder(
-                itemCount: widget.controller.list.length,
-                itemBuilder: (_, index) => ListTile(
-                  title: Center(
-                      child: Text(widget.controller.list[index].product.name)),
-                  trailing:
-                      Text(widget.controller.list[index].product.price.reais()),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: Container(
-                      child: Flex(
-                        direction: Axis.horizontal,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            color: Colors.black,
-                            onPressed: () {
-                              widget.controller.addItem(
-                                  widget.controller.list[index].product);
-                            },
-                          ),
-                          Text(widget.controller.list[index].quantity
-                              .toString()),
-                          IconButton(
-                            icon: const Icon(Icons.remove),
-                            color: Colors.black,
-                            onPressed: () {
-                              widget.controller.removeItem(
-                                  widget.controller.list[index].product);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-              );
+                itemCount: widget.controller.list.length + 1,
+                itemBuilder: (_, index) {
+                  if (index == widget.controller.list.length) {
+                    return ListTile(
+                      title: Center(child: Text('Valor total')),
+                      trailing: Text('total'),
+                      onTap: () {},
+                    );
+                  } else {
+                    return CardProduct(
+                        cardProduct: widget.controller.list[index],
+                        widget: widget);
+                  }
+                });
       }),
     );
   }

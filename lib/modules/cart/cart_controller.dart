@@ -11,6 +11,8 @@ abstract class _CartControllerBase with Store {
   @observable
   var list = ObservableList<CardModel>();
 
+  int total = 0;
+
   @observable
   String listLength = "0";
 
@@ -40,6 +42,7 @@ abstract class _CartControllerBase with Store {
     }
     int sizeList = 0;
     list.forEach((e) => sizeList += e.quantity);
+
     listLength = sizeList.toString();
   }
 }
