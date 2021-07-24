@@ -1,16 +1,11 @@
-# carrinho_de_compras
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# #LevelUP5 | Raro Academy  
+  
+## Flutter Notes  
+Atualmente o projeto salva apenas um usuário localmente e todas as vezes que se registra um novo usuário o antigo é substituído.
+  
+## Resultado
+<center>
+<p float="center">  
+  <img src="https://user-images.githubusercontent.com/30707007/126880780-19953a34-258c-45f2-8f01-9dce40197c2f.gif" width="350" />  
+</p>
+</center>  
