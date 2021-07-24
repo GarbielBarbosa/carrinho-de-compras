@@ -1,7 +1,5 @@
 # #LevelUP5 | Raro Academy  
-  
-## Flutter Notes  
-Atualmente o projeto salva apenas um usuário localmente e todas as vezes que se registra um novo usuário o antigo é substituído.
+ 
   
 ## Resultado
 <center>
