@@ -26,23 +26,24 @@ abstract class _CartControllerBase with Store {
       final CardModel cardModel = CardModel(product: product, quantity: 1);
       list.add(cardModel);
     }
-    int sizeList = 0;
-    list.forEach((e) => sizeList += e.quantity);
-    listLength = sizeList.toString();
+    updateSizeList();
   }
 
   @action
   void removeItem(ProductModel product) {
     final index = list.indexWhere((e) => e.product == product);
     if (list[index].quantity <= 1) {
-      list.removeWhere((e) => e.product == product);
+      list.removeAt(index);
     } else {
       list[index] =
           CardModel(product: product, quantity: list[index].quantity - 1);
     }
+    updateSizeList();
+  }
+
+  updateSizeList() {
     int sizeList = 0;
     list.forEach((e) => sizeList += e.quantity);
-
     listLength = sizeList.toString();
   }
 }

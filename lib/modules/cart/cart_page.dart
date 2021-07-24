@@ -20,20 +20,12 @@ class _CartPageState extends State<CartPage> {
         return widget.controller.list.isEmpty
             ? Center(child: Text("OPS! Seu carrinho está vazio"))
             : ListView.builder(
-                itemCount: widget.controller.list.length + 1,
-                itemBuilder: (_, index) {
-                  if (index == widget.controller.list.length) {
-                    return ListTile(
-                      title: Center(child: Text('Valor total')),
-                      trailing: Text('total'),
-                      onTap: () {},
-                    );
-                  } else {
-                    return CardProduct(
-                        cardProduct: widget.controller.list[index],
-                        widget: widget);
-                  }
-                });
+                itemCount: widget.controller.list.length,
+                itemBuilder: (_, index) => CardProduct(
+                    cardProduct: widget.controller.list[index],
+                    add: widget.controller.addItem,
+                    remove: widget.controller.removeItem),
+              );
       }),
     );
   }

@@ -69,12 +69,39 @@ class _HomePageState extends State<HomePage> {
         } else if (controller.appStatus == AppStatus.success) {
           return ListView.builder(
             itemCount: controller.products.length,
-            itemBuilder: (_, index) => ListTile(
-              title: Text(controller.products[index].name),
-              trailing: Text(controller.products[index].price.reais()),
-              onTap: () {
-                cartController.addItem(controller.products[index]);
-              },
+            itemBuilder: (_, index) => Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: Container(
+                    alignment: Alignment.bottomLeft,
+                    width: 60.0,
+                    height: 60.0,
+                    child: ClipOval(
+                      child: Image.network(controller.products[index].image,
+                          fit: BoxFit.contain, loadingBuilder:
+                              (BuildContext context, Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }),
+                    ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
+                  title: Text(controller.products[index].name),
+                  trailing: Text(controller.products[index].price.reais()),
+                  onTap: () {
+                    cartController.addItem(controller.products[index]);
+                  },
+                ),
+              ),
             ),
           );
         } else if (controller.appStatus == AppStatus.empty) {

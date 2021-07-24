@@ -54,6 +54,17 @@ mixin _$CartController on _CartControllerBase, Store {
   }
 
   @override
+  void removeItem(ProductModel product) {
+    final _$actionInfo = _$_CartControllerBaseActionController.startAction(
+        name: '_CartControllerBase.removeItem');
+    try {
+      return super.removeItem(product);
+    } finally {
+      _$_CartControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 list: ${list},

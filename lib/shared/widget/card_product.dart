@@ -7,11 +7,13 @@ class CardProduct extends StatelessWidget {
   const CardProduct({
     Key? key,
     required this.cardProduct,
-    required this.widget,
+    required this.add,
+    required this.remove,
   }) : super(key: key);
 
   final CardModel cardProduct;
-  final CartPage widget;
+  final Function add;
+  final Function remove;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -20,20 +22,30 @@ class CardProduct extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           width: 60.0,
           height: 60.0,
+          child: ClipOval(
+            child: Image.network(cardProduct.product.image, fit: BoxFit.contain,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }),
+          ),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.grey.shade300,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-              image: NetworkImage(
-                cardProduct.product.image,
-              ),
-            ),
           ),
         ),
         title: Center(child: Text(cardProduct.product.name)),
-        trailing: Text(cardProduct.product.price.reais()),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(cardProduct.product.price.reais()),
+          ],
+        ),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: Container(
@@ -50,7 +62,7 @@ class CardProduct extends StatelessWidget {
                     icon: const Icon(Icons.add),
                     color: Colors.white,
                     onPressed: () {
-                      widget.controller.addItem(cardProduct.product);
+                      add(cardProduct.product);
                     },
                   ),
                 ),
@@ -65,7 +77,7 @@ class CardProduct extends StatelessWidget {
                           icon: const Icon(Icons.remove),
                           color: Colors.white,
                           onPressed: () {
-                            widget.controller.removeItem(cardProduct.product);
+                            remove(cardProduct.product);
                           },
                         )
                       : Container(
@@ -73,7 +85,7 @@ class CardProduct extends StatelessWidget {
                             icon: const Icon(Icons.delete),
                             color: Colors.white,
                             onPressed: () {
-                              widget.controller.removeItem(cardProduct.product);
+                              remove(cardProduct.product);
                             },
                           ),
                         ),
